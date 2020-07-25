@@ -19,7 +19,7 @@ export default class Popular extends React.Component {
           <li key = {language}>
             <button className = 'btn-clear nav-link'>{language}</button>
           </li>
-      ))}
+        ))}
       </ul>
     )
   }
