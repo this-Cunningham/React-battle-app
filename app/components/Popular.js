@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function NavLanguages ({selected, onUpdateLanguage}) {
 
@@ -19,6 +20,11 @@ function NavLanguages ({selected, onUpdateLanguage}) {
       ))}
     </ul>
   )
+}
+
+NavLanguages.propTypes = {
+  selected: PropTypes.string.isRequired,
+  onUpdateLanguage: PropTypes.func.isRequired
 }
 
 
@@ -44,10 +50,13 @@ export default class Popular extends React.Component {
     const {selectedLanguage} = this.state
 
     return (
-      <NavLanguages
-        selected = {selectedLanguage}
-        onUpdateLanguage = {this.updateLanguage}
-      />
+      <React.Fragment>
+        <NavLanguages
+          selected = {selectedLanguage}
+          onUpdateLanguage = {this.updateLanguage}
+        />
+      </React.Fragment>
+
 
     )
   }
