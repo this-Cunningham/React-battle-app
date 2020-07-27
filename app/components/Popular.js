@@ -14,8 +14,7 @@ function NavLanguages ({selected, onUpdateLanguage}) {
           <button
             className = 'btn-clear nav-link'
             style = {language === selected ? {color: 'green'}: null}
-            onClick = {()=> onUpdateLanguage(language)}
-            >
+            onClick = {()=> onUpdateLanguage(language)}>
             {language}
           </button>
         </li>
@@ -35,21 +34,49 @@ export default class Popular extends React.Component {
     super(props)
 
     this.state = {
-      selectedLanguage: 'All'
+      selectedLanguage: 'All',
+      repos: null,
+      error: null
     }
 
   this.updateLanguage = this.updateLanguage.bind(this);
+  this.isLoading = this.isLoading.bind(this)
+  }
+
+//loads default 'All' after mount
+  componentDidMount () {
+    this.updateLanguage(this.state.selectedLanguage)
   }
 
   updateLanguage(selectedLanguage){
     this.setState({
-      selectedLanguage
+      selectedLanguage,
+      repos: null,
+      error: null
     })
+
+    fetchPopularRepos(selectedLanguage)
+    .then((repos)=> this.setState({
+      repos,
+      error: null
+    }))
+    .catch(() => {
+
+      console.warn('Error', error)
+
+      this.setState({
+        error: 'Error fetching repos'
+      })
+    })
+  }
+
+  isLoading(){
+    return this.state.repos===null && this.state.error===null
   }
 
   render(){
 
-    const {selectedLanguage} = this.state
+    const {selectedLanguage, repos, error} = this.state
 
     return (
       <React.Fragment>
@@ -57,6 +84,13 @@ export default class Popular extends React.Component {
           selected = {selectedLanguage}
           onUpdateLanguage = {this.updateLanguage}
         />
+
+        {this.isLoading() && <p>Loading!</p>}
+
+        {error && <p>{error}</p>}
+
+        {repos && <pre>{JSON.stringify(repos, null, 2)}</pre>}
+
       </React.Fragment>
 
 

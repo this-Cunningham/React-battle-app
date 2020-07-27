@@ -1,13 +1,13 @@
 export function fetchPopularRepos (language) {
-  const endpoint = 'window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`)'
+  const endpoint = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`)
 
-  fetch(endpoint)
-  .then((res)=>res.json())
-  .then((data)=> {
-    if (!data.items) {
-      throw new Error ('Error fetching repos', data.message)
-    }
+  return fetch(endpoint)
+    .then((res)=>res.json())
+    .then((data)=> {
+      if (!data.items) {
+        throw new Error ('Error fetching repos', data.message)
+      }
 
-    return data.items
+      return data.items
   })
 }
