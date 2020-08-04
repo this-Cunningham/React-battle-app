@@ -138,8 +138,7 @@ handleSubmit(id, username) {
 
 handleReset (id) {
   this.setState ({
-    [id]: null,
-    battle: false
+    [id]: null
   })
 }
 
@@ -148,8 +147,8 @@ handleReset (id) {
 
     if (battle===true) {
       return <Results
-        playerone = {playerOne}
-        playertwo = {playerTwo}
+        playerOne = {playerOne}
+        playerTwo = {playerTwo}
       />
     }
     return(
@@ -160,10 +159,10 @@ handleReset (id) {
           <h1 className="center-text header-lg">Players</h1>
           <div className="row space-around">
             {playerOne === null ?  //ternary operator
-              (<PlayerInput
+              <PlayerInput
                 onSubmit = {(player)=>this.handleSubmit('playerOne', player)}
                 label = 'Player One'
-              />)
+              />
               : <PlayerPreview
                   username = {playerOne}
                   label = 'Player One'
@@ -172,13 +171,13 @@ handleReset (id) {
             }
 
             {playerTwo === null ?
-              (<PlayerInput
+              <PlayerInput
                 onSubmit = {(player)=>this.handleSubmit('playerTwo', player)}
                 label = 'Player Two'
-              />)
+              />
               : <PlayerPreview
                   username = {playerTwo}
-                  label = 'playerTwo'
+                  label = 'Player Two'
                   onReset = {()=>this.handleReset('playerTwo')}
                 />
             }
