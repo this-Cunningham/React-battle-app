@@ -149,6 +149,13 @@ handleReset (id) {
       return <Results
         playerOne = {playerOne}
         playerTwo = {playerTwo}
+        onReset = {()=>{
+          this.setState({
+            playerOne: null,
+            playerTwo: null,
+            battle: false
+          })
+        }}
       />
     }
     return(
