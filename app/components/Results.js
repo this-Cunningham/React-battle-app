@@ -3,36 +3,52 @@ import {battle} from '../utils/api'
 import {FaCompass, FaBriefcase, FaUsers, FaUserFriends, FaCode, FaUser} from 'react-icons/fa'
 import Card from './Card'
 import PropTypes from 'prop-types'
+import Loading from './Loading'
+import Tooltip from './Tooltip'
 
-function ProfileList ({profile}) {
-  return (
-    <ul className="card-list">
-      <li>
-        <FaUser color = 'lightblue' size = {22} />
-        {profile.name}
-      </li>
-      {profile.location && (
+class ProfileList extends React.Component {
+  constructor(props){
+    super(props)
+  }
+
+  render(){
+    const {profile} = this.props;
+
+    return (
+      <ul className="card-list">
         <li>
-          <FaCompass color = 'yellow' size = {22} />
-          {profile.location}
+          <FaUser color = 'lightblue' size = {22} />
+          {profile.name}
         </li>
-      )}
-      {profile.company && (
+        {profile.location && (
+          <Tooltip text = "User's Location">
+            <li>
+              <FaCompass color = 'yellow' size = {22} />
+              {profile.location}
+            </li>
+          </Tooltip>
+        )}
+        {profile.company && (
+          <Tooltip text = "User's Company">
+            <li>
+              <FaBriefcase color = 'brown' size = {22} />
+              {profile.company}
+            </li>
+          </Tooltip>
+        )}
         <li>
-          <FaBriefcase color = 'brown' size = {22} />
-          {profile.company}
+          <FaUsers color = 'blue' size = {22} />
+          {profile.followers.toLocaleString()} followers
         </li>
-      )}
-      <li>
-        <FaUsers color = 'blue' size = {22} />
-        {profile.followers.toLocaleString()} followers
-      </li>
-      <li>
-        <FaUserFriends color = 'blue' size = {22} />
-        {profile.following.toLocaleString()} following
-      </li>
-    </ul>
-  )
+        <li>
+          <FaUserFriends color = 'blue' size = {22} />
+          {profile.following.toLocaleString()} following
+        </li>
+      </ul>
+    )
+  }
+
+
 }
 
 ProfileList.propTypes = {
@@ -51,7 +67,7 @@ export default class Results extends React.Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount () {
     const {playerOne, playerTwo} = this.props;
 
     battle([playerOne, playerTwo])
@@ -74,7 +90,7 @@ export default class Results extends React.Component {
     const {winner, loser, error, loading} = this.state;
 
     if (loading === true){
-      return <p>Loading</p>
+      return <Loading />
     }
 
     if (error) {
