@@ -158,7 +158,7 @@ handleReset (id) {
         }}
       />
     }
-    return(
+    return (
 
       <React.Fragment>
         <Instructions />
