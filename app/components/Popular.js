@@ -50,15 +50,14 @@ function ReposGrid ({repos}) {
               href = {html_url}
               >
                 <ul className="card-list">
-                  <Tooltip text = 'Github Username'>
-                    <li>
+                  <li>
+                    <Tooltip text = 'Github Username'>
                       <FaUser color='rgb(255,191,116)' size = {22} />
                       <a href={`https://github.com/${login}`}>
                       {login}
                       </a>
-                    </li>
-                  </Tooltip>
-
+                    </Tooltip>
+                  </li>
                   <li>
                     <FaStar color = 'rgb(255,115, 0)' size = {22} />
                     {stargazers_count.toLocaleString()} stars
