@@ -21,20 +21,20 @@ class ProfileList extends React.Component {
           {profile.name}
         </li>
         {profile.location && (
-          <Tooltip text = "User's Location">
-            <li>
+          <li>
+            <Tooltip text = "User's Location">
               <FaCompass color = 'yellow' size = {22} />
               {profile.location}
-            </li>
-          </Tooltip>
+            </Tooltip>
+          </li>
         )}
         {profile.company && (
-          <Tooltip text = "User's Company">
-            <li>
+          <li>
+            <Tooltip text = "User's Company">
               <FaBriefcase color = 'brown' size = {22} />
               {profile.company}
-            </li>
-          </Tooltip>
+            </Tooltip>
+          </li>
         )}
         <li>
           <FaUsers color = 'blue' size = {22} />
