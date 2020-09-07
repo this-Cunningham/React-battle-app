@@ -22,6 +22,11 @@ li {
   padding: 50px;
 }
 
+.dark {
+  color: #DADADA;
+  background: #1c2022;
+}
+
 .flex-center {
   display: flex;
   justify-content: center;
