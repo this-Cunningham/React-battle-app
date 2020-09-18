@@ -33,24 +33,19 @@ function Instructions(){
 }
 
 class PlayerInput extends React.Component {
-  constructor(props){
-    super(props)
-
-    this.state = {
-      username: ''
-    }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+  state = {
+    username: ''
   }
 
-handleChange(e){
-  this.setState({
-    username: e.target.value
-  })
-}
+  static propTypes = {
+    label: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func.isRequired
+  }
 
-  handleSubmit(e){
-    e.preventDefault()
+  handleChange = (e) => this.setState({username: e.target.value})
+
+  handleSubmit = (e) => {
+    e.preventDefault();
     this.props.onSubmit(this.state.username)
   }
 
@@ -87,12 +82,6 @@ handleChange(e){
     )
   }
 }
-
-PlayerInput.propTypes = {
-  label: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired
-}
-
 
 function PlayerPreview({username, onReset, label}) {
   return(
@@ -135,29 +124,14 @@ PlayerPreview.propTypes = {
 }
 
 export default class Battle extends React.Component {
-  constructor(props){
-    super(props)
-
-    this.state = {
-      playerOne: null,
-      playerTwo: null,
-      // battle: false
-    }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleReset = this.handleReset.bind(this)
+  state = {
+    playerOne: null,
+    playerTwo: null,
+    // battle: false
   }
 
-handleSubmit(id, username) {
-  this.setState({
-    [id]: username  //computed property name [id]
-  })
-}
-
-handleReset (id) {
-  this.setState ({
-    [id]: null
-  })
-}
+handleSubmit = (id, username) => this.setState({[id]: username}) //computed property name [id]
+handleReset = (id) => this.setState ({[id]: null})
 
   render() {
     const { playerOne, playerTwo } = this.state;

@@ -38,6 +38,11 @@ li {
   background: transparent;
 }
 
+.nav li {
+  margin-right: 10px;
+}
+
+
 .nav-link {
   font-size: 18px;
   font-weight: bold;
@@ -52,6 +57,10 @@ li {
 
 .space-around {
   justify-content: space-around;
+}
+
+.space-between {
+  justify-content: space-between;
 }
 
 .header-lg {

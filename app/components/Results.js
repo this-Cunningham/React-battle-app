@@ -8,49 +8,39 @@ import Tooltip from './Tooltip'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 
-class ProfileList extends React.Component {
-  constructor(props){
-    super(props)
-  }
-
-  render(){
-    const {profile} = this.props;
-
-    return (
-      <ul className="card-list">
+function ProfileList ({profile}) {
+  return (
+    <ul className="card-list">
+      <li>
+        <FaUser color = 'lightblue' size = {22} />
+        {profile.name}
+      </li>
+      {profile.location && (
         <li>
-          <FaUser color = 'lightblue' size = {22} />
-          {profile.name}
+          <Tooltip text = "User's Location">
+            <FaCompass color = 'yellow' size = {22} />
+            {profile.location}
+          </Tooltip>
         </li>
-        {profile.location && (
-          <li>
-            <Tooltip text = "User's Location">
-              <FaCompass color = 'yellow' size = {22} />
-              {profile.location}
-            </Tooltip>
-          </li>
-        )}
-        {profile.company && (
-          <li>
-            <Tooltip text = "User's Company">
-              <FaBriefcase color = 'brown' size = {22} />
-              {profile.company}
-            </Tooltip>
-          </li>
-        )}
+      )}
+      {profile.company && (
         <li>
-          <FaUsers color = 'blue' size = {22} />
-          {profile.followers.toLocaleString()} followers
+          <Tooltip text = "User's Company">
+            <FaBriefcase color = 'brown' size = {22} />
+            {profile.company}
+          </Tooltip>
         </li>
-        <li>
-          <FaUserFriends color = 'blue' size = {22} />
-          {profile.following.toLocaleString()} following
-        </li>
-      </ul>
-    )
-  }
-
-
+      )}
+      <li>
+        <FaUsers color = 'blue' size = {22} />
+        {profile.followers.toLocaleString()} followers
+      </li>
+      <li>
+        <FaUserFriends color = 'blue' size = {22} />
+        {profile.following.toLocaleString()} following
+      </li>
+    </ul>
+  )
 }
 
 ProfileList.propTypes = {
@@ -58,19 +48,16 @@ ProfileList.propTypes = {
 }
 
 export default class Results extends React.Component {
-  constructor(props){
-    super(props)
-
-    this.state = {
-      winner: null,
-      loser: null,
-      error: null,
-      loading: true
-    }
+  state = {
+    winner: null,
+    loser: null,
+    error: null,
+    loading: true
   }
 
   componentDidMount () {
-    const {playerOne, playerTwo} = queryString.parse(this.props.location.search); //queryString.parse returns an object from the query string that looks like...
+    const {playerOne, playerTwo} = queryString.parse(this.props.location.search);
+    // queryString.parse returns an object from the query string that looks like...
     //{playerOne: 'username1', playerTwo: 'username2'} from ?playerOne=username1&playerTwo=username2
 
     console.log(queryString.parse(this.props.location.search));
