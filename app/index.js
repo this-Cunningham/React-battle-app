@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import { ThemeProvider } from './contexts/theme'  //named import
-import Nav from './components/nav'
+import Nav from './components/Nav'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Loading from './components/Loading'
 
@@ -31,7 +31,7 @@ class App extends React.Component {
           <div className={this.state.theme}>
             <div className = 'container'>
               <Nav />
-              <React.Suspense fallback = {<Loading />}>
+              <React.Suspense fallback = {Loading}>
                 <Switch>
                   <Route exact path = '/' component = {Popular}/>
                   <Route exact path = '/battle' component = {Battle} />
